@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: inventario
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: robson.rocha
+Implementation-Vendor-Id: br.com.cbmerj
+Build-Jdk: 1.8.0_265
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/inventario
+Created-By: Maven Integration for Eclipse
+
