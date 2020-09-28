@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import br.com.cbmerj.inventory.services.validation.utils.CustomListSerializer;
+import br.com.cbmerj.inventory.services.validation.utils.CustomList;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
