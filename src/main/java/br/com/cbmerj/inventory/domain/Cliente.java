@@ -5,22 +5,23 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import br.com.cbmerj.inventory.domain.enums.TipoCliente;
+import br.com.cbmerj.inventory.services.validation.utils.CustomListCliente;
+import br.com.cbmerj.inventory.services.validation.utils.CustomListEndereco;
 
 @Entity
 public class Cliente implements Serializable {
@@ -39,6 +40,7 @@ public class Cliente implements Serializable {
 	@JsonIgnore
 	private String senha;
 
+	@JsonSerialize(using = CustomListEndereco.class)
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 
@@ -73,6 +75,20 @@ public class Cliente implements Serializable {
 		/* this.senha = senha;
 		addPerfil(Perfil.CLIENTE); */
 	}
+	
+	
+
+	public Cliente(Cliente backReference) {
+		super();
+		this.id = backReference.id;
+		this.nome = backReference.nome;
+		this.email = backReference.email;
+		this.cpfOuCnpj = backReference.cpfOuCnpj;
+		this.tipo = backReference.tipo;
+		this.senha = backReference.senha;
+		this.telefones = backReference.telefones;
+	}
+
 
 	public Integer getId() {
 		return id;

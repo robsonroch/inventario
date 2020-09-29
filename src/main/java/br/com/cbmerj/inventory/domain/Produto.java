@@ -2,9 +2,7 @@ package br.com.cbmerj.inventory.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,12 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
-import br.com.cbmerj.inventory.services.validation.utils.CustomListSerializer;
-import br.com.cbmerj.inventory.services.validation.utils.CustomList;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import br.com.cbmerj.inventory.services.validation.utils.CustomListCategoria;
 
 @Entity
 public class Produto  implements Serializable {
@@ -35,7 +31,7 @@ public class Produto  implements Serializable {
 		joinColumns = @JoinColumn(name = "produto_id"),
 		inverseJoinColumns = @JoinColumn(name = "categoria_id")
 	)
-	@JsonSerialize(using = CustomListSerializer.class)
+	@JsonSerialize(using = CustomListCategoria.class)
 	private List<Categoria> categorias = new ArrayList<>();
 	
 //	@JsonIgnore

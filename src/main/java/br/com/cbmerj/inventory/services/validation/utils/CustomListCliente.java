@@ -9,31 +9,32 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
-import br.com.cbmerj.inventory.domain.Categoria;
+import br.com.cbmerj.inventory.domain.Cliente;
 
-public class CustomListSerializer extends StdSerializer<List<Categoria>> {
+public class CustomListCliente extends StdSerializer<List<Cliente>> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public CustomListSerializer() {
+	public CustomListCliente() {
 		this(null);
 	}
 
-	public CustomListSerializer(Class<List<Categoria>> t) {
+	public CustomListCliente(Class<List<Cliente>> t) {
 		super(t);
 	}
 
 	@Override
-	public void serialize(List<Categoria> items, JsonGenerator generator, SerializerProvider provider)
+	public void serialize(List<Cliente> items, JsonGenerator generator, SerializerProvider provider)
 			throws IOException, JsonProcessingException {
 
-		List<String> nomes = new ArrayList<>();
-		for (Categoria item : items) {
-			nomes.add(item.getNome());
+		List<Cliente> enderecos = new ArrayList<>();
+		for (Cliente item : items) {
+			
+			enderecos.add(new Cliente(item));
 		}
-		generator.writeObject(nomes);
+		generator.writeObject(enderecos);
 	}
 }

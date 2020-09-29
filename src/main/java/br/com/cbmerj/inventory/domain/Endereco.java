@@ -9,7 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import br.com.cbmerj.inventory.services.validation.utils.CustomListCliente;
 
 @Entity
 public class Endereco implements Serializable {
@@ -24,7 +26,6 @@ public class Endereco implements Serializable {
 	private String bairro;
 	private String cep;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
@@ -46,6 +47,17 @@ public class Endereco implements Serializable {
 		this.cep = cep;
 		this.cliente = cliente;
 		this.setCidade(cidade);
+	}
+	
+	public Endereco(Endereco enderecoBackReference) {
+		super();
+		this.id = enderecoBackReference.id;
+		this.logradouro = enderecoBackReference.logradouro;
+		this.numero = enderecoBackReference.numero;
+		this.complemento = enderecoBackReference.complemento;
+		this.bairro = enderecoBackReference.bairro;
+		this.cep = enderecoBackReference.cep;
+		this.setCidade(enderecoBackReference.cidade);
 	}
 
 	public Integer getId() {
