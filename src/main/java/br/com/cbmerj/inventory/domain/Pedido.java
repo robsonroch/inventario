@@ -31,10 +31,8 @@ public class Pedido implements Serializable {
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date instante;
 	
-	/*
-	 * @OneToOne(cascade=CascadeType.ALL, mappedBy="pedido") private Pagamento
-	 * pagamento;
-	 */
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido") 
+	private Pagamento pagamento;
 
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
@@ -80,11 +78,9 @@ public class Pedido implements Serializable {
 		this.instante = instante;
 	}
 
-	/*
-	 * public Pagamento getPagamento() { return pagamento; }
-	 * 
-	 * public void setPagamento(Pagamento pagamento) { this.pagamento = pagamento; }
-	 */
+	public Pagamento getPagamento() { return pagamento; }
+	
+	public void setPagamento(Pagamento pagamento) { this.pagamento = pagamento; }
 
 	public Cliente getCliente() {
 		return cliente;
