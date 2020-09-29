@@ -13,6 +13,7 @@ import br.com.cbmerj.inventory.domain.Cidade;
 import br.com.cbmerj.inventory.domain.Cliente;
 import br.com.cbmerj.inventory.domain.Endereco;
 import br.com.cbmerj.inventory.domain.Estado;
+import br.com.cbmerj.inventory.domain.ItemPedido;
 import br.com.cbmerj.inventory.domain.Pagamento;
 import br.com.cbmerj.inventory.domain.PagamentoComBoleto;
 import br.com.cbmerj.inventory.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import br.com.cbmerj.inventory.repositories.CidadeRepository;
 import br.com.cbmerj.inventory.repositories.ClienteRepository;
 import br.com.cbmerj.inventory.repositories.EnderecoRepository;
 import br.com.cbmerj.inventory.repositories.EstadoRepository;
+import br.com.cbmerj.inventory.repositories.ItemPedidoRepository;
 import br.com.cbmerj.inventory.repositories.PagamentoRepository;
 import br.com.cbmerj.inventory.repositories.PedidoRepository;
 import br.com.cbmerj.inventory.repositories.ProdutoRepository;
@@ -48,6 +50,8 @@ public class InventoryApplication implements CommandLineRunner {
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(InventoryApplication.class, args);
@@ -111,5 +115,18 @@ public class InventoryApplication implements CommandLineRunner {
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 	}	
 }
