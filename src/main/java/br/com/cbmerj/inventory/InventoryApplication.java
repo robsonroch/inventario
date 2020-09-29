@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.cbmerj.inventory.domain.Categoria;
 import br.com.cbmerj.inventory.domain.Cidade;
+import br.com.cbmerj.inventory.domain.Cliente;
+import br.com.cbmerj.inventory.domain.Endereco;
 import br.com.cbmerj.inventory.domain.Estado;
 import br.com.cbmerj.inventory.domain.Produto;
+import br.com.cbmerj.inventory.domain.enums.TipoCliente;
 import br.com.cbmerj.inventory.repositories.CategoriaRepository;
 import br.com.cbmerj.inventory.repositories.CidadeRepository;
+import br.com.cbmerj.inventory.repositories.ClienteRepository;
+import br.com.cbmerj.inventory.repositories.EnderecoRepository;
 import br.com.cbmerj.inventory.repositories.EstadoRepository;
 import br.com.cbmerj.inventory.repositories.ProdutoRepository;
 
@@ -27,6 +32,10 @@ public class InventoryApplication implements CommandLineRunner {
 	private EstadoRepository estadoRepository;
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(InventoryApplication.class, args);
@@ -65,6 +74,16 @@ public class InventoryApplication implements CommandLineRunner {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
+		
+		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+		
+		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 203", "Jardim", "38220834", cli1, c1);
+		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+		
+		clienteRepository.save(cli1);
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 				
 	}	
 }
