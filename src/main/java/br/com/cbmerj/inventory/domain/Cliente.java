@@ -16,11 +16,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import br.com.cbmerj.inventory.domain.enums.TipoCliente;
-import br.com.cbmerj.inventory.services.validation.utils.CustomListCliente;
 import br.com.cbmerj.inventory.services.validation.utils.CustomListEndereco;
 
 @Entity
@@ -55,7 +56,7 @@ public class Cliente implements Serializable {
 	 * HashSet<>();
 	 */
 
-	@JsonIgnore
+	@JsonBackReference
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 
