@@ -21,6 +21,7 @@ import br.com.cbmerj.inventory.domain.Categoria;
 import br.com.cbmerj.inventory.domain.Cliente;
 import br.com.cbmerj.inventory.dto.CategoriaDTO;
 import br.com.cbmerj.inventory.dto.ClienteDTO;
+import br.com.cbmerj.inventory.dto.ClienteNewDTO;
 import br.com.cbmerj.inventory.services.ClienteService;
 
 @RestController
@@ -34,6 +35,13 @@ public class ClienteResource {
 	public ResponseEntity<Cliente> find(@PathVariable Integer id) {
 		Cliente cliente = service.find(id);
 		return ResponseEntity.ok().body(cliente);
+	}
+	
+	@RequestMapping(method=RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO dto) {
+		Cliente cliente = service.insert(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 		
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)

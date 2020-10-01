@@ -13,7 +13,9 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.com.cbmerj.inventory.domain.Categoria;
+import br.com.cbmerj.inventory.domain.Cliente;
 import br.com.cbmerj.inventory.dto.CategoriaDTO;
+import br.com.cbmerj.inventory.dto.ClienteDTO;
 import br.com.cbmerj.inventory.repositories.CategoriaRepository;
 import br.com.cbmerj.inventory.services.exceptions.DataIntegrityException;
 import br.com.cbmerj.inventory.services.exceptions.ObjectNotFoundException;
@@ -34,9 +36,10 @@ public class CategoriaService {
 		return repo.save(fromDTO(dto));
 	}
 
-	public Categoria update(@Valid CategoriaDTO dto) {
-		find(dto.getId());
-		return repo.save(fromDTO(dto));
+	public Categoria update(CategoriaDTO dto) {
+		Categoria newObj = find(dto.getId());
+		updateData(newObj, fromDTO(dto));
+		return repo.save(newObj);
 	}
 
 	public void delete(Integer id) {
@@ -58,5 +61,9 @@ public class CategoriaService {
 	
 	public Categoria fromDTO(CategoriaDTO dto) {
 		return new Categoria(dto);
+	}
+	
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
 	}
 }
