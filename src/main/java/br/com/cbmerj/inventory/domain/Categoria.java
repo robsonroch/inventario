@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import br.com.cbmerj.inventory.dto.CategoriaDTO;
+
 @Entity
 public class Categoria implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -17,6 +19,7 @@ public class Categoria implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String nome;
 	
 	@ManyToMany(mappedBy="categorias")
@@ -29,6 +32,12 @@ public class Categoria implements Serializable {
 		super();
 		this.id = id;
 		this.nome = nome;
+	}
+
+	public Categoria(CategoriaDTO dto) {
+		super();
+		this.id = dto.getId();
+		this.nome = dto.getNome();
 	}
 
 	public Integer getId() {
