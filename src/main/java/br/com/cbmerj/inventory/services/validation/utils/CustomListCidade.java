@@ -35,7 +35,7 @@ public class CustomListCidade extends StdSerializer<List<Cidade>> {
 
 		List<Cidade> enderecos = new ArrayList<>();
 		for (Cidade item : items) {
-			enderecos.add(item);
+			enderecos.add(new Cidade(item));
 		}
 		generator.writeObject(enderecos);
 	}

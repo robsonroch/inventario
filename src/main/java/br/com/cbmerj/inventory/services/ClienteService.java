@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.cbmerj.inventory.domain.Categoria;
 import br.com.cbmerj.inventory.domain.Cliente;
 import br.com.cbmerj.inventory.repositories.ClienteRepository;
 import br.com.cbmerj.inventory.services.exceptions.ObjectNotFoundException;

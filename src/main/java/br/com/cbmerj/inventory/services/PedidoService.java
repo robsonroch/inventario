@@ -1,19 +1,11 @@
 package br.com.cbmerj.inventory.services;
 
-import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import br.com.cbmerj.inventory.domain.Cliente;
-import br.com.cbmerj.inventory.domain.ItemPedido;
-import br.com.cbmerj.inventory.domain.PagamentoComBoleto;
 import br.com.cbmerj.inventory.domain.Pedido;
-import br.com.cbmerj.inventory.domain.enums.EstadoPagamento;
 import br.com.cbmerj.inventory.repositories.ItemPedidoRepository;
 import br.com.cbmerj.inventory.repositories.PagamentoRepository;
 import br.com.cbmerj.inventory.repositories.PedidoRepository;
