@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import br.com.cbmerj.inventory.domain.enums.TipoCliente;
+import br.com.cbmerj.inventory.dto.ClienteDTO;
 import br.com.cbmerj.inventory.services.validation.utils.CustomListEndereco;
 
 @Entity
@@ -86,6 +87,13 @@ public class Cliente implements Serializable {
 		this.tipo = backReference.tipo;
 		this.senha = backReference.senha;
 		this.telefones = backReference.telefones;
+	}
+
+
+	public Cliente(ClienteDTO objDto) {
+		super();
+		this.nome = objDto.getNome();
+		this.email = objDto.getEmail();
 	}
 
 
