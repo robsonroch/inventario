@@ -19,3 +19,4 @@ nbdist/
 .nb-gradle/
 *.class
 
+/target/
